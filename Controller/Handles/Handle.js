@@ -37,7 +37,7 @@ class Handle extends BaseHandle{
         res.end();
     }
 
-    async addProduct(req,res){
+    async  addProduct(req,res){
         if(req.method==='GET'){
             let html=await this.getTemplate('./Views/CRUD/create.html');
             res.write(html);
@@ -120,6 +120,12 @@ class Handle extends BaseHandle{
             res.end();
         })
     };
+
+    async Login(req,res){
+        let html=await this.getTemplate('./Views/Login.html');
+        res.write(html);
+        res.end();
+    }
 
 };
 

@@ -55,6 +55,11 @@ const server=http.createServer((req, res)=>{
                     console.log(err.message);
                 });
                 break;
+            case '/login':
+                Handle.Login(req,res).catch(err=>{
+                    console.log(err.message);
+                });
+                break;
 
             default:
                 res.end();
