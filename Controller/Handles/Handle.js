@@ -230,20 +230,19 @@ class Handle extends BaseHandle{
 
     async showList(req,res){
         let html=await this.getTemplate('./Views/CRUD/read.html');
-        let sql='SELECT masp,tensp,gia,soluong,hinhanh,mota from sanpham';
+        let sql='SELECT tensp,gia,soluong,hinhanh,mota from sanpham';
         let products=await this.getSQL(sql);
         console.log(products)
 
         let newHtml='';
         products.forEach((product,index)=>{
             newHtml+=`<tr>`
-            newHtml+=`<td>${index+1}</td>`
             newHtml+=`<td>${product.tensp}</td>`
             newHtml+=`<td>${product.gia}</td>`
             newHtml+=`<td>${product.soluong}</td>`
             newHtml+=`<td><img width="150" height="150" src="/upload/${product.hinhanh}"</td>`
             newHtml+=`<td>${product.mota}</td>`
-            newHtml+=`<td><a onclick="return confirm('Are you sure want to this product?')" href="/product/delete?masp=${product.masp}"  class="btn btn-danger">Delete</a>     <a href="/product/update?masp=${product.masp}" class="btn btn-primary">Update</a></td>`
+            newHtml+=`<td><a class="btn btn-danger">Thêm vào giỏ hàng</a> </td>`
             newHtml+=`</tr>`
         })
         html=html.replace('{product-list}',newHtml);
