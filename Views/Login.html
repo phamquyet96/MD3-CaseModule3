@@ -183,30 +183,33 @@
   </style>
 </head>
 <body>
-<div class="wrapper">
-  <div class="container main">
-    <div class="row">
-      <div class="col-md-6 side-image"></div>
-      <div class="col-md-6 right">
-        <div class="input-box">
-          <header>Đăng nhập</header>
-          <div class="input-field">
-            <input type="text" class="input" id="username" required autocomplete="off">
-            <label for="username">Tên đăng nhập</label>
-          </div>
-          <div class="input-field">
-            <input type="password" class="input" id="password" required>
-            <label for="password">Mật khẩu</label>                        </div>
-          <div class="input-field">
-            <input type="submit" class="submit" value="Đăng nhập">
-          </div>
-          <div class="sign_in">
-            <span>Tìm mật khẩu <a href="#">Tạo tài khoản mới</a></span>
+<form action="/login" method="post">
+  <div class="wrapper">
+    <div class="container main">
+      <div class="row">
+        <div class="col-md-6 side-image"></div>
+        <div class="col-md-6 right">
+          <div class="input-box">
+            <header>Đăng nhập</header>
+            <div class="input-field">
+              <input type="text" class="input" id="username"name="username" required autocomplete="off">
+              <label for="username">Tên đăng nhập</label>
+            </div>
+            <div class="input-field">
+              <input type="password" class="input" id="password" name="password" required>
+              <label for="password">Mật khẩu</label>
+            </div>
+            <div class="input-field">
+              <input type="submit" class="submit" value="Đăng nhập">
+            </div>
+            <div class="sign_in">
+              <span>Tìm mật khẩu <a href="/register">Tạo tài khoản mới</a></span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</form>
 </body>
 </html>
