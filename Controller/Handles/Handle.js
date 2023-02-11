@@ -227,8 +227,29 @@ class Handle extends BaseHandle{
         res.end();
     };
 
+    async adminShowList(req, res) {
+        let html = await this.getTemplate('./Views/CRUD/read.html');
+        let sql = 'SELECT masp,tensp,gia,soluong,hinhanh,mota from sanpham';
+        let products = await this.getSQL(sql);
 
-    async showList(req,res){
+        let newHtml = '';
+        products.forEach((product, index) => {
+            newHtml += `<tr>`
+            newHtml += `<td>${index + 1}</td>`
+            newHtml += `<td>${product.tensp}</td>`
+            newHtml += `<td>${product.gia}</td>`
+            newHtml += `<td>${product.soluong}</td>`
+            newHtml += `<td><img width="150" height="150" src="/upload/${product.hinhanh}"</td>`
+            newHtml += `<td>${product.mota}</td>`
+            newHtml += `<td><a onclick="return confirm('Are you sure want to this product?')" href="/admin/product/delete?masp=${product.masp}"  class="btn btn-danger">Delete</a>     <a href="/admin/product/update?masp=${product.masp}" class="btn btn-primary">Update</a></td>`
+            newHtml += `</tr>`
+        })
+        html = html.replace('{product-list}', newHtml);
+        res.write(html);
+        res.end();
+    }
+
+    async userShowList(req,res){
         let html=await this.getTemplate('./Views/CRUD/read.html');
         let sql='SELECT tensp,gia,soluong,hinhanh,mota from sanpham';
         let products=await this.getSQL(sql);
@@ -270,7 +291,7 @@ class Handle extends BaseHandle{
         }
     }
 
-    async  addProduct(req,res){
+    async  adminAddProduct(req,res){
         if(req.method==='GET'){
             let html=await this.getTemplate('./Views/CRUD/create.html');
             res.write(html);
@@ -293,7 +314,7 @@ class Handle extends BaseHandle{
                 fs.rename(tmpPath, desPath, (err) => {
                     if (err) console.log(err);
                 });
-                res.writeHead(301, { Location: "/product" });
+                res.writeHead(301, { Location: "/admin/product" });
                 res.end();
             })
         };
@@ -305,7 +326,7 @@ class Handle extends BaseHandle{
 
         let sql=`Delete from sanpham where masp='${masp}'`;
         await this.getSQL(sql);
-        res.writeHead(301,{Location:'/product'});
+        res.writeHead(301,{Location:'/admin/product'});
         res.end();
     }
 
@@ -327,7 +348,7 @@ class Handle extends BaseHandle{
         res.end();
     };
 
-    async updateProductList(req,res) {
+    async adminUpdateProductList(req,res) {
         let query = url.parse(req.url).query;
         let masp = qs.parse(query).masp;
 
@@ -349,7 +370,7 @@ class Handle extends BaseHandle{
             fs.rename(tmpPath, desPath, (err) => {
                 if (err) console.log(err);
             });
-            res.writeHead(301, { Location: "/product" });
+            res.writeHead(301, { Location: "/admin/product" });
             res.end();
         })
     };

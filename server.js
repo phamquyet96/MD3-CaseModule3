@@ -121,28 +121,33 @@ const server = http.createServer((req, res) => {
                     console.log(err.message);
                 });
                 break;
-            case '/product':
-                Handle.showList(req, res).catch(err => {
+            case '/user/product':
+                Handle.userShowList(req, res).catch(err => {
                     console.log(err.message);
                 });
                 break;
-            case '/product/add':
-                Handle.addProduct(req, res).catch(err => {
+            case '/admin/product':
+                Handle.adminShowList(req, res).catch(err => {
                     console.log(err.message);
                 });
                 break;
-            case '/product/delete':
+            case '/admin/product/add':
+                Handle.adminAddProduct(req, res).catch(err => {
+                    console.log(err.message);
+                });
+                break;
+            case '/admin/product/delete':
                 Handle.deleteProduct(req, res).catch(err => {
                     console.log(err.message);
                 });
                 break;
-            case '/product/update':
+            case '/admin/product/update':
                 Handle.updateProduct(req, res).catch(err => {
                     console.log(err.message);
                 });
                 break;
-            case '/list/update':
-                Handle.updateProductList(req, res).catch(err => {
+            case '/admin/list/update':
+                Handle.adminUpdateProductList(req, res).catch(err => {
                     console.log(err.message);
                 });
                 break;
