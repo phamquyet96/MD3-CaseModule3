@@ -171,6 +171,16 @@ const server = http.createServer((req, res) => {
                     console.log(err.message);
                 })
                 break;
+            case '/admin/search':
+                Handle.adminSearch(req, res).catch(err=>{
+                    console.log(err.message);
+                })
+                break;
+            case '/user/search':
+                Handle.userSearch(req, res).catch(err=>{
+                    console.log(err.message);
+                })
+                break;
 
             default:
                 res.end();
